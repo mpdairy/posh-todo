@@ -3542,3 +3542,17 @@ Compiling /home/teddy/clojure/posh-todo/src/posh_todo/core.cljs
 Compiling target/figwheel_temp/dev/figwheel/connect.cljs
 notifying browser that file changed:  out/posh_todo/categories.js
 [32mSuccessfully compiled "resources/public/js/main.js" in 0.134 seconds.[0m
+[0mCompiling "resources/public/js/main.js" from ["src"]...
+Compiling src/posh_todo/components.cljs
+WARNING: Use of undeclared Var posh-todo.components/options at line 23 src/posh_todo/components.cljs
+WARNING: Use of undeclared Var posh-todo.components/options at line 23 src/posh_todo/components.cljs
+WARNING: Use of undeclared Var posh-todo.components/stage-id at line 71 src/posh_todo/components.cljs
+Compiling /home/teddy/clojure/posh-todo/src/posh_todo/tasks.cljs
+Compiling /home/teddy/clojure/posh-todo/src/posh_todo/dashboard.cljs
+Compiling src/posh_todo/categories.cljs
+Compiling /home/teddy/clojure/posh-todo/src/posh_todo/core.cljs
+Compiling target/figwheel_temp/dev/figwheel/connect.cljs
+notifying browser that file changed:  resources/public/js/goog/deps.js
+notifying browser that file changed:  resources/public/js/cljs_deps.js
+notifying browser that file changed:  out/posh_todo/components.js
+[32mSuccessfully compiled "resources/public/js/main.js" in 0.846 seconds.[0m

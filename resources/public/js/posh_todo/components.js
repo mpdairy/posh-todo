@@ -10,8 +10,8 @@ var edit = reagent.core.atom.call(null,"");
 return ((function (edit){
 return (function (conn__$1,add_fn__$1){
 return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"input","input",556931961),new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"type","type",1174270348),"text",new cljs.core.Keyword(null,"value","value",305978217),cljs.core.deref.call(null,edit),new cljs.core.Keyword(null,"onChange","onChange",-312891301),((function (edit){
-return (function (p1__36937_SHARP_){
-return cljs.core.reset_BANG_.call(null,edit,p1__36937_SHARP_.target.value);
+return (function (p1__21142_SHARP_){
+return cljs.core.reset_BANG_.call(null,edit,p1__21142_SHARP_.target.value);
 });})(edit))
 ], null)], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"button","button",1456579943),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"onClick","onClick",-1991238530),((function (edit){
 return (function (){
@@ -36,8 +36,8 @@ return "Add";
 posh_todo.components.edit_box = (function posh_todo$components$edit_box(conn,edit_id,id,attr){
 var edit = cljs.core.deref.call(null,posh.core.pull.call(null,conn,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword("edit","val","edit/val",123487430)], null),edit_id));
 return new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"input","input",556931961),new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"type","type",1174270348),"text",new cljs.core.Keyword(null,"value","value",305978217),new cljs.core.Keyword("edit","val","edit/val",123487430).cljs$core$IFn$_invoke$arity$1(edit),new cljs.core.Keyword(null,"onChange","onChange",-312891301),((function (edit){
-return (function (p1__36938_SHARP_){
-return posh.core.transact_BANG_.call(null,conn,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword("db","add","db/add",235286841),edit_id,new cljs.core.Keyword("edit","val","edit/val",123487430),p1__36938_SHARP_.target.value], null)], null));
+return (function (p1__21143_SHARP_){
+return posh.core.transact_BANG_.call(null,conn,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword("db","add","db/add",235286841),edit_id,new cljs.core.Keyword("edit","val","edit/val",123487430),p1__21143_SHARP_.target.value], null)], null));
 });})(edit))
 ], null)], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"button","button",1456579943),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"onClick","onClick",-1991238530),((function (edit){
 return (function (){
