@@ -20,7 +20,7 @@
         {:onClick #(when-not (empty? @edit)
                      (add-fn @edit)
                      (reset! edit ""))}
-        (or (:button-text options) "Add")]])))
+        "Add"]])))
 
 ;;;;; edit box
 
@@ -68,7 +68,7 @@
   (let [stage (r/atom 0)]
     (fn [stages finish-fn]
       (when (= @stage (count stages))
-        (do (finish-fn stage-id)
+        (do (finish-fn)
             (reset! stage 0)))
       [:button
        {:onClick    #(swap! stage inc)
