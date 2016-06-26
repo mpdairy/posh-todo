@@ -1,5 +1,5 @@
 (ns posh-todo.categories
-  (:require [posh.core :as p]
+  (:require [posh.reagent :as p]
             [posh-todo.util :as util]
             [posh-todo.tasks :as tasks]
             [posh-todo.components :as comp]
@@ -14,18 +14,21 @@
      #(p/transact! conn [[:db.fn/retractEntity category-id]])]))
 
 (defn category-panel [conn todo-id]
-  (let [c @(p/q conn '[:find ?c .
-                      :in $ ?t
-                      :where
-                      [?t :todo/display-category ?c]]
-               todo-id)]
+  (let [c @(p/q '[:find ?c .
+                  :in $ ?t
+                  :where
+                  [?t :todo/display-category ?c]]
+                conn
+                todo-id)]
+    
+    ;;'[:q [:find ?c . :in $ ?t :where [?t :todo/display-category ?c]] ([:db :conn0] 1)]
     (if (not c)
       [dash/dashboard conn todo-id]
       [:div
        [:h2 [comp/editable-label conn c :category/name]]
        [delete-category conn c]
        [tasks/task-panel conn c]
-       ;[add-task c]
+                                        ;[add-task c]
        ])))
 
 (defn add-category!
@@ -37,9 +40,9 @@
 
 (defn category-item [conn todo-id category]
   [:button
-   {:onClick #(p/transact!
-               conn
-               [[:db/add todo-id :todo/display-category (:db/id category)]])}
+   {:on-click #(p/transact!
+                conn
+                [[:db/add todo-id :todo/display-category (:db/id category)]])}
    (:category/name category)
    " (" (count (:task/_category category)) ")"])
 

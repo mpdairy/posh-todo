@@ -1,5 +1,5 @@
 (ns posh-todo.components
-  (:require [posh.core :as p]
+  (:require [posh.reagent :as p]
             [posh-todo.db :as db :refer [conn]]
             [reagent.core :as r]
             [posh-todo.util :as util]))
@@ -17,7 +17,7 @@
          :value @edit
          :onChange #(reset! edit (-> % .-target .-value))}]
        [:button
-        {:onClick #(when-not (empty? @edit)
+        {:on-click #(when-not (empty? @edit)
                      (add-fn @edit)
                      (reset! edit ""))}
         "Add"]])))
@@ -32,25 +32,25 @@
        :value (:edit/val edit)
        :onChange #(p/transact! conn [[:db/add edit-id :edit/val (-> % .-target .-value)]])}]
      [:button
-      {:onClick #(p/transact! conn [[:db/add id attr (:edit/val edit)]
+      {:on-click #(p/transact! conn [[:db/add id attr (:edit/val edit)]
                                     [:db.fn/retractEntity edit-id]])}
       "Done"]
      [:button
-      {:onClick #(p/transact! conn [[:db.fn/retractEntity edit-id]])}
+      {:on-click #(p/transact! conn [[:db.fn/retractEntity edit-id]])}
       "Cancel"]]))
 
 (defn editable-label [conn id attr]
   (let [val  (attr @(p/pull conn [attr] id))
-        edit @(p/q conn '[:find ?edit .
-                          :in $ ?id ?attr
-                          :where
-                          [?edit :edit/id ?id]
-                          [?edit :edit/attr ?attr]]
-                   id attr)]
+        edit @(p/q '[:find ?edit .
+                     :in $ ?id ?attr
+                     :where
+                     [?edit :edit/id ?id]
+                     [?edit :edit/attr ?attr]]
+                   conn id attr)]
     (if-not edit
       [:span val
        [:button
-        {:onClick #(util/new-entity! conn {:edit/id id :edit/val val :edit/attr attr})}
+        {:on-click #(util/new-entity! conn {:edit/id id :edit/val val :edit/attr attr})}
         "Edit"]]
       [edit-box conn edit id attr])))
 
@@ -71,7 +71,7 @@
         (do (finish-fn)
             (reset! stage 0)))
       [:button
-       {:onClick    #(swap! stage inc)
+       {:on-click    #(swap! stage inc)
         :onMouseOut #(reset! stage 0)}
        (nth stages @stage)])))
 

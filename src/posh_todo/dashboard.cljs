@@ -1,5 +1,5 @@
 (ns posh-todo.dashboard
-  (:require [posh.core :as p]
+  (:require [posh.reagent :as p]
             [posh-todo.db :as db :refer [conn]]
             [posh-todo.util :as util]
             [posh-todo.tasks :as tasks]
@@ -9,9 +9,9 @@
 (defn dashboard-category [conn todo-id category]
   [:div
    [:button
-    {:onClick #(p/transact!
-                conn
-                [[:db/add todo-id :todo/display-category (:db/id category)]])}
+    {:on-click #(p/transact!
+                 conn
+                 [[:db/add todo-id :todo/display-category (:db/id category)]])}
     (:category/name category)] " (" (count (:task/_category category)) ")"])
 
 (defn delete-listed [conn tasks]
@@ -20,14 +20,13 @@
    #(p/transact! conn (map (fn [t] [:db.fn/retractEntity t]) tasks))])
 
 (defn category-select [conn task-id]
-  (let [cats @(p/q conn
-                   '[:find ?cat ?cat_name ?task_cat :in $ ?t
+  (let [cats @(p/q '[:find ?cat ?cat_name ?task_cat :in $ ?t
                      :where
                      [?t :task/category ?task_cat]
                      [?task_cat :category/todo ?todo]
                      [?cat :category/todo ?todo]
                      [?cat :category/name ?cat_name]]
-                   task-id)]
+                   conn task-id)]
     [:span
      [:select {:on-change #(p/transact!
                             conn
@@ -52,21 +51,19 @@
   (let [listing (-> @(p/pull conn [:todo/listing] todo-id)
                     :todo/listing)
         tasks   (case listing
-                  :all     @(p/q conn
-                                 '[:find [?t ...]
+                  :all     @(p/q '[:find [?t ...]
                                    :in $ ?todo
                                    :where
                                    [?c :category/todo ?todo]
                                    [?t :task/category ?c]]
-                                 todo-id)
-                  @(p/q conn
-                        '[:find [?t ...]
+                                 conn todo-id)
+                  @(p/q '[:find [?t ...]
                           :in $ ?todo ?done
                           :where
                           [?c :category/todo ?todo]
                           [?t :task/category ?c]
                           [?t :task/done ?done]]
-                        todo-id (= listing :done)))]
+                        conn todo-id (= listing :done)))]
     [:div
      [:h3 (case listing
             :all "All Tasks"
@@ -109,7 +106,7 @@
                              :todo/display-category
                              :db/id)]
     [:button
-     {:onClick #(p/transact!
+     {:on-click #(p/transact!
                  conn
                  (if current-category
                    [[:db/retract todo-id :todo/display-category current-category]

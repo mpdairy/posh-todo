@@ -5,6 +5,8 @@
 (def schema {:task/category         {:db/valueType :db.type/ref}
              :category/todo         {:db/valueType :db.type/ref}
              :todo/display-category {:db/valueType :db.type/ref}
+             :task/name             {:db/unique :db.unique/identity}
+             :todo/name             {:db/unique :db.unique/identity}
              :action/editing        {:db/cardinality :db.cardinality/many}})
 
 (def conn (d/create-conn schema))

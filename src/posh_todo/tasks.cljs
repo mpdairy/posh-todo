@@ -1,5 +1,5 @@
 (ns posh-todo.tasks
-  (:require [posh.core :as p]
+  (:require [posh.reagent :as p]
             [posh-todo.db :as db :refer [conn]]
             [posh-todo.util :as util]
             [posh-todo.components :as comp]))
